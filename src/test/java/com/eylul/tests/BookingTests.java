@@ -3,7 +3,6 @@ package com.eylul.tests;
 import com.eylul.base.BaseTest;
 import com.eylul.models.Booking;
 import com.eylul.models.CreateBookingResponse;
-import com.eylul.utils.AuthUtils;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -107,7 +106,7 @@ public class BookingTests extends BaseTest {
 
         Booking response =
                 given(requestSpec)
-                        .cookie("token", AuthUtils.getToken())
+                        .cookie("token", authToken)
                             .body(requestBody)
                         .when()
                             .log().all()
@@ -134,7 +133,7 @@ public class BookingTests extends BaseTest {
         given(requestSpec)
                 .when()
                     .log().all()
-                    .cookie("token", AuthUtils.getToken())
+                    .cookie("token", authToken)
                     .delete("/booking/" + createdBookingId)
                 .then()
                     .statusCode(201)
