@@ -2,6 +2,9 @@
 
 REST Assured API test framework built from scratch using Java 21, JUnit 5, and Maven.
 
+Tests cover the [Restful Booker API](https://restful-booker.herokuapp.com/apidoc/index.html) — a public REST API simulating a hotel booking system. 
+The framework validates authentication, full CRUD operations on bookings, and negative/edge cases.
+
 ## Test Report
 
 ![Allure Report](docs/allure-reports-files/allure-report-screenshot-1.png)
