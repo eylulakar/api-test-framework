@@ -1,16 +1,18 @@
 package com.eylul.tests;
 
 import com.eylul.base.BaseTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-public class BookingTestsNegative extends BaseTest {
+public class NegativeBookingTests extends BaseTest {
 
     private static int createdBookingId;
 
     @Test
+    @DisplayName("DELETE without auth token returns 403")
     void testGetNonExistentBookingById(){
         given(requestSpec)
                 .when()
@@ -22,6 +24,7 @@ public class BookingTestsNegative extends BaseTest {
     }
 
     @Test
+    @DisplayName("POST with empty body returns 500")
     void testCreateBookingWithInvalidBody(){
         String requestBody = """
                 {}
@@ -39,6 +42,7 @@ public class BookingTestsNegative extends BaseTest {
     }
 
     @Test
+    @DisplayName("GET non-existent booking ID returns 404")
     void testDeleteBookingWithoutAuth(){
         given(requestSpec)
                 .when()

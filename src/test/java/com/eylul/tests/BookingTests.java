@@ -3,10 +3,7 @@ package com.eylul.tests;
 import com.eylul.base.BaseTest;
 import com.eylul.models.Booking;
 import com.eylul.models.CreateBookingResponse;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static io.restassured.RestAssured.given;
@@ -19,6 +16,7 @@ public class BookingTests extends BaseTest {
 
     @Test
     @Order(1)
+    @DisplayName("GET booking by valid ID returns 200")
     void testGetBookingById(){
         given(requestSpec)
                 .when()
@@ -28,11 +26,11 @@ public class BookingTests extends BaseTest {
                     .statusCode(200)
                     .body("firstname", notNullValue())
                 .log().all();
-
     }
 
     @Test
     @Order(2)
+    @DisplayName("GET all bookings returns non-empty list")
     void testGetBookings(){
         given(requestSpec)
                 .when()
@@ -42,11 +40,11 @@ public class BookingTests extends BaseTest {
                     .statusCode(200)
                     .body("$", hasSize(greaterThan(0)))
                     .log().ifValidationFails();
-
     }
 
     @Test
     @Order(3)
+    @DisplayName("POST create booking returns created resource")
     void testCreateBooking(){
         String requestBody = """
                 {
@@ -89,6 +87,7 @@ public class BookingTests extends BaseTest {
 
     @Test
     @Order(4)
+    @DisplayName("PUT update booking with auth returns updated resource")
     void testUpdateBooking(){
         String requestBody = """
                 {
@@ -129,6 +128,7 @@ public class BookingTests extends BaseTest {
 
     @Test
     @Order(5)
+    @DisplayName("DELETE booking with auth returns 201, GET returns 404")
     void testDeleteBookingById(){
         given(requestSpec)
                 .when()
@@ -146,6 +146,5 @@ public class BookingTests extends BaseTest {
                 .then()
                     .statusCode(404)
                     .log().all();
-
     }
 }
